@@ -1,7 +1,7 @@
 ;;; (+ 4 4)
-(print (eval (+ 5 5)))
+; (print (eval (+ 5 5)))
 
-(print (+ 9 9))
+; (print (+ 9 9))
 
 ; Chapter 1: Introduction to Lisp.
 
@@ -41,7 +41,7 @@
 
 ; A wide range of characters are acceptable for symbols.
 
-(print (append '(Pat Kim) (list '(Robin Sandy) '(John Q Public))))
+; (print (append '(Pat Kim) (list '(Robin Sandy) '(John Q Public))))
 
 
 ; 1.2 (Variables): In computation, we need the ability to define new objects,
@@ -50,12 +50,45 @@
 ; One way to assign values to variables is with setf.
 
 (setf p '(John Q Public))
-(print p)
+; (print p)
 (append p 'Aurelius)
-(print p) ; CL-USER> (JOHN Q PUBLIC) (Immutability preserves values)
-(print (append p 'Aurelius)) ; This will capture the change and print it.
+; (print p) ; CL-USER> (JOHN Q PUBLIC) (Immutability preserves values)
+; (print (append p 'Aurelius)) ; This will capture the change and print it.
 
 (setf int-ten 10)
-(print (+ int-ten int-ten))
+; (print (+ int-ten int-ten))
 (setf p (append p '(Aurelius))) ; You can re-assign values to a variable, using the variables previous value.
-(print (+ int-ten (length q))) ; Length is built in function for lists.
+; (print (+ int-ten (length q))) ; Length is built in function for lists.
+
+; 1.4 Special Forms
+
+; setf violates the evaluation rule followed by *functions*, which evaluate all of their arguments, and then apply themselves to said arguments.
+
+; setf doesn't follow this rule because it is a *special form*, which are a part of the lisp syntax.
+; These forms are always lists in which the first element is a privileged symbol.
+; Also, special forms return a value, as opposed to just applying an effect to some values.
+
+; The term special form not only refers to the keywords, but any form that begins with them, making (setf p (append p '(Aurelius))) a special form.
+
+; It turns out that the quote mark, is syntactic sugar for the special form quote,
+; a special form that evaluates to the data it's given.
+
+; special forms include: defun, defparameter, setf, let, case, if, function and quote
+
+; 1.4 Lists
+
+; append and length aren't the only list processing functions
+
+; The functions 'first' through to 'fourth' grab those elements from lists.
+
+; The function rest grabs the rest of the list, after the first.
+
+; nil and () are synonymous, and thus both equate to false.
+
+(setf x '((1st element) 2 (element 3) ((4)) 5))
+; (print x)
+
+; (print (cons 'Mr p))
+; (print (cons (first p) (rest p)))
+(setf town (list 'Anytown 'Usa))
+(print (list p 'of town 'may 'have 'already 'won!))
