@@ -3,6 +3,8 @@
 
 (print (+ 9 9))
 
+; Chapter 1: Introduction to Lisp.
+
 ; Computers allow one to carry out computations.
 
 ; A word processing program does so on words, a calculator, numbers,
@@ -17,7 +19,7 @@
 ; or even new  types of acceptable input.
 
 
-; Symbolic Computation:
+; 1.1: Symbolic Computation.
 ; Besides numbers, we can represent letters, strings, and symbols.
 ; Non-atomic values are built by combining objects into lists.
 
@@ -29,10 +31,6 @@
 ; which keeps the strings Pat/Robin from being evaluated as functions,
 ; Succinctly :: ' turns the following value into data.
 
-
-
-(print (append '(Pat Kim) (list '(Robin Sandy) '(John Q Public))))
-
 ; About symbols
 
 ; Lisp attaches no external significance to symbols, while we recognize the
@@ -43,4 +41,21 @@
 
 ; A wide range of characters are acceptable for symbols.
 
-; 
+(print (append '(Pat Kim) (list '(Robin Sandy) '(John Q Public))))
+
+
+; 1.2 (Variables): In computation, we need the ability to define new objects,
+; in terms of others. Symbols are quite useful for this.
+
+; One way to assign values to variables is with setf.
+
+(setf p '(John Q Public))
+(print p)
+(append p 'Aurelius)
+(print p) ; CL-USER> (JOHN Q PUBLIC) (Immutability preserves values)
+(print (append p 'Aurelius)) ; This will capture the change and print it.
+
+(setf int-ten 10)
+(print (+ int-ten int-ten))
+(setf p (append p '(Aurelius))) ; You can re-assign values to a variable, using the variables previous value.
+(print (+ int-ten (length q))) ; Length is built in function for lists.
