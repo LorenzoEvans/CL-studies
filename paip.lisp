@@ -90,5 +90,28 @@
 
 ; (print (cons 'Mr p))
 ; (print (cons (first p) (rest p)))
+
 (setf town (list 'Anytown 'Usa))
 (print (list p 'of town 'may 'have 'already 'won!))
+
+; 1.5 Defining new functions.
+(defun last-name (name)
+  (first (last name)))
+
+; Functions receive a name first, and a parameter list.
+; Functions can also have a doc string describing the functions purpose.
+; Function names must be valid symbols, with the body consisting of expressions
+; to be evaluate when the function is called.
+; The last expression evaluated is returned as the functions value.
+
+; The problem here is that last name doesn't define a persons last name,
+; but rather an element of a list.
+; We can define first name as well, which is good practice, in that first
+; will differ in it's use from first-name, *even though they perform the same operation*
+
+(setf names '((John Q Public) (Malcolm X)
+              (Admiral Grace Murray Hopper) (Spot)
+              (Aristotle) (A A Milne) (Z Z Top)
+              (Sir Larry Olivier) (Miss Scarlet)))
+
+; 1.6 Using functions
