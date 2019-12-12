@@ -164,5 +164,46 @@
     (first_name (rest name))
     (first name)))
 
-(print (mapcar #'first_name names)) 
+(print (mapcar #'first_name names))
 ; => (JOHN MALCOLM GRACE SPOT ARISTOTLE A Z LARRY SCARLET) 
+
+; We can observe how this works by useing the trace function.
+
+(first_name '(Madam Major General Paula Jones))
+
+; The first_name function is revursive, as it's definition includes a call to itself.
+
+; 1.7 Higher Order Functions
+
+; Functions in Lisp can be used as arguments, and manipulated like other functions,
+; which we saw in mapcar.
+
+; To demonstrate this, we will define a function, mappend.
+
+; mappend maps a function over a list, and appends the results together.
+
+(defun mappend (fn the-list)
+  (apply #'append (mapcar fn the-list)))
+
+(defun self-double (x)
+  (list x (* 2 x)))
+
+(print (self-double 20))
+
+(print (mappend #'self-double '(1 200 3000)))
+
+; When given a list of n arguments, mapcar returns a list of n-values.
+
+; Each value results from calling the function on the respective argument.
+
+; Mappend takes this process one step further, and appending them all into one list
+
+(defun num-and-neg (x)
+  (mappend #'num-and-neg x))
+
+(defun number-neg (y)
+  (if (numberp x)
+    (list x (- x))
+    nil))
+
+(print (number-neg '(1 2 3)))
