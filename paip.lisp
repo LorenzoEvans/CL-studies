@@ -92,7 +92,7 @@
 ; (print (cons (first p) (rest p)))
 
 (setf town (list 'Anytown 'Usa))
-(print (list p 'of town 'may 'have 'already 'won!))
+; (print (list p 'of town 'may 'have 'already 'won!))
 
 ; 1.5 Defining new functions.
 (defun last-name (name)
@@ -141,3 +141,28 @@
 ; So, the n's must match. Functions expecting n arguments need n lists.
 
 (mapcar #'first-name names)
+; returns (JOHN MALCOLM ADMIRAL SPOT ARISTOTLE A Z SIR MISS)
+
+; The problem here is that some of these aren't "true" first names.
+
+(defparameter *titles*
+  '(Mr Mrs Miss Sir Madam Dr Admiral Major General))
+
+; defparameter is a new special form, which defines a variable that does not
+; change over the course of computation, but may be subject to changes via programmer.
+
+; Now that we have this, we should re-define first-name, saying that if the
+; first word of a name is a title, ignore it, then return the first-name of
+; the rest of the list.
+
+; We use the special form if, which evaluates a boolean test expression,
+; and a branch for if the test returns true or false. As with most special forms,
+; every argument to an if is not evaluated.
+
+(defun first_name (name)
+  (if (member (first name) *titles*)
+    (first_name (rest name))
+    (first name)))
+
+(print (mapcar #'first_name names)) 
+; => (JOHN MALCOLM GRACE SPOT ARISTOTLE A Z LARRY SCARLET) 
