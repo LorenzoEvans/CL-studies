@@ -49,15 +49,15 @@
 
 ; One way to assign values to variables is with setf.
 
-(setf p '(John Q Public))
+; (setf p '(John Q Public))
 ; (print p)
-(append p 'Aurelius)
+; (append p 'Aurelius)
 ; (print p) ; CL-USER> (JOHN Q PUBLIC) (Immutability preserves values)
 ; (print (append p 'Aurelius)) ; This will capture the change and print it.
 
-(setf int-ten 10)
+; (setf int-ten 10)
 ; (print (+ int-ten int-ten))
-(setf p (append p '(Aurelius))) ; You can re-assign values to a variable, using the variables previous value.
+; (setf p (append p '(Aurelius))) ; You can re-assign values to a variable, using the variables previous value.
 ; (print (+ int-ten (length q))) ; Length is built in function for lists.
 
 ; 1.4 Special Forms
@@ -85,7 +85,7 @@
 
 ; nil and () are synonymous, and thus both equate to false.
 
-(setf x '((1st element) 2 (element 3) ((4)) 5))
+; (setf x '((1st element) 2 (element 3) ((4)) 5))
 ; (print x)
 
 ; (print (cons 'Mr p))
@@ -164,7 +164,7 @@
     (first_name (rest name))
     (first name)))
 
-(print (mapcar #'first_name names))
+; (print (mapcar #'first_name names))
 ; => (JOHN MALCOLM GRACE SPOT ARISTOTLE A Z LARRY SCARLET) 
 
 ; We can observe how this works by useing the trace function.
@@ -188,9 +188,9 @@
 (defun self-double (x)
   (list x (* 2 x)))
 
-(print (self-double 20))
+; (print (self-double 20))
 
-(print (mappend #'self-double '(1 200 3000)))
+; (print (mappend #'self-double '(1 200 3000)))
 
 ; When given a list of n arguments, mapcar returns a list of n-values.
 
@@ -202,8 +202,18 @@
   (mappend #'num-and-neg x))
 
 (defun number-neg (y)
-  (if (numberp x)
-    (list x (- x))
+  (if (numberp y)
+    (list y (- y))
     nil))
 
-(print (number-neg '(1 2 3)))
+; (print (number-neg '(1 2 3)))
+
+; Alternate definition of mappend ::
+
+(defun m-append (fn a-list)
+  (if (eq nil a-list)
+    nil
+    (append (funcall fn (first a-list))
+            (m-append fn (rest a-list)))))
+
+(print (m-append #'self-double '(25 50 80)))
