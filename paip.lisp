@@ -96,7 +96,10 @@
 
 ; 1.5 Defining new functions.
 (defun last-name (name)
-  (first (last name)))
+  (first (last name))) ; last is built in
+
+(defun first-name (name)
+  (first name))
 
 ; Functions receive a name first, and a parameter list.
 ; Functions can also have a doc string describing the functions purpose.
@@ -115,3 +118,26 @@
               (Sir Larry Olivier) (Miss Scarlet)))
 
 ; 1.6 Using functions
+; One good thing about defining lists, is they allow for easier use of functions.
+
+(mapcar #'last-name names)
+
+; The #' notation maps the name of a function, to the function itself.
+; The built in function mapcar is passed two arguments, a function, and a list,
+; calling the function on each item of the list.
+
+; Map is self explanatory, but car refers to the lisp function car, which is
+; an archaic term for first, meaning Contents of the Address Register.
+
+; There's an archaic term for rest, which is cdr, or Contents of the Decrement Register
+
+; Mapcar examples
+
+(mapcar #'- '(1 2 3 4)) ; => -1 -2 -3 -4
+(mapcar #'+ '(1 2 3 4) '(10 20 30 40)) ; => 11 22 33 44
+
+; Mapcar can be passed another list, in general, mapcar expects a n-ary fn,
+; and n lists, applying the function to the first element of each list.
+; So, the n's must match. Functions expecting n arguments need n lists.
+
+(mapcar #'first-name names)
