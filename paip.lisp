@@ -216,4 +216,13 @@
     (append (funcall fn (first a-list))
             (m-append fn (rest a-list)))))
 
+; funcall is similar to apply, taking a function, and applying it to a list, of arguments separately.
+
+; Every function has been given a name or predefined so far, but it is possible to introduce a function with no name, using the lambda syntax.
+
+; Lambda comes from Alonzo Church's lambda calculus.
+
+; A lambda expression is a nonatomic name for a function, meaning that it does need to be referenced with a hashquote to retrieve the actual function.
+
+
 (print (m-append #'self-double '(25 50 80)))
