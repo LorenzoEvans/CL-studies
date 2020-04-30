@@ -224,5 +224,42 @@
 
 ; A lambda expression is a nonatomic name for a function, meaning that it does need to be referenced with a hashquote to retrieve the actual function.
 
+((lambda (x) (+ x 2)) 4)
+
+(funcall #'(lambda (x) (+ 2 x)) 4)
+
+; To understand this, observe how functions are evaluated.
+
+; The normal rule states that a symbol is evaluated by looking up the value of
+; the variable a symbol refers to.
+
+; A list is evaluated in one of two ways.
 
 (print (m-append #'self-double '(25 50 80)))
+
+; 1.9 The lisp evaluation rule:
+
+; Expressions are either lists or atoms.
+
+; Lists are special form expressions or function application.
+
+; Special forms are created when the first element of a list is a Special
+; form operator, which does not necessarily evaluate all of it's arguments
+; like function application does.
+
+; Every atom is a symbol or non-symbol.
+
+; A symbol evaluates to the most recent value assigned to the variable that
+; the symbol names.
+
+; A non-symbol atom evaluates to itself, mostly numbers and strings.
+
+; There is a difference between reading and evaluation.
+
+; What generally happens is an entire expression is read, then evaluated.
+
+; What makes Lisp different?
+  
+  ; Lists:
+    ; The list is a very versatile data structure
+
